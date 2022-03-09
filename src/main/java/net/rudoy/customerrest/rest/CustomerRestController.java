@@ -3,6 +3,7 @@ package net.rudoy.customerrest.rest;
 import net.rudoy.customerrest.model.Customer;
 import net.rudoy.customerrest.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -34,9 +35,16 @@ public class CustomerRestController {
         return new ResponseEntity<>(customer, HttpStatus.OK);
     }
 
-//    @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<Customer> saveCustomer(Customer customer) {
-//        customerService.save(customer);
-//
-//    }
+    @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Customer> saveCustomer(Customer customer) {
+        HttpHeaders headers = new HttpHeaders();
+
+        if (customer == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        customerService.save(customer);
+        return new ResponseEntity<>(customer, headers, HttpStatus.OK);
+    }
+
 }
