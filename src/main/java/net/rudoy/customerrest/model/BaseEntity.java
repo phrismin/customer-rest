@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.GeneratorType;
+import org.springframework.context.annotation.Bean;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

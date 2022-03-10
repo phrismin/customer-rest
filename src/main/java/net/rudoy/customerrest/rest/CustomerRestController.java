@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.function.ServerRequest;
 import org.springframework.web.util.UriComponentsBuilder;
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/customers")
@@ -76,9 +77,16 @@ public class CustomerRestController {
 
         customerService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 
+    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Customer>> getAllCustomers() {
+        List<Customer> all = customerService.getAll();
 
+        if (all.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
 
-
+        return new ResponseEntity<>(all, HttpStatus.OK);
     }
 }

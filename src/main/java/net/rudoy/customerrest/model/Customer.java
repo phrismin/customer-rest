@@ -3,6 +3,7 @@ package net.rudoy.customerrest.model;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.context.annotation.Bean;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
